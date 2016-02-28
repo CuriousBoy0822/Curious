@@ -4,11 +4,13 @@
 #include <Ice/Ice.h>
 #include <string>
 #include <vector>
+#include "LogWrapper.h"
 #include "CuriousMasterInterfaceI.h"
 #include "CuriousRegisterHandleThread.h"
 
 using namespace Ice;
 using namespace taf;
+using namespace log4cplus;
 
 namespace Curious
 {

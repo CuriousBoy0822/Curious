@@ -21,14 +21,13 @@ namespace Curious
 		ServerDataInfo() {}
 		virtual ~ServerDataInfo() {}
 
-		//register server and get the next server to transfer messages
-		int register(const std::string& sServerIP, std::string& sNextIp);
+		int registerServerIP(const std::string& sServerIP, std::string& sNextIp);
 
 		int size();
 
 	private:
-		TC_ThreadMutex           _mutex;
-		ServerInfoCache_t        _serverInfo;
+		TC_ThreadMutex             _mutex;
+		ServerInfoCache_t          _serverInfo;
 		ServerInfoCacheSet_t     _serverInfoSet;
 	};
 };

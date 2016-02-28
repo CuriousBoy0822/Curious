@@ -21,6 +21,17 @@ namespace Curious
 		int iTimeout = properties->getPropertyAsInt("curious.master.timeout");
 		int iRegisterThreadSize = properties->getPropertyAsInt("curious.master.registerthreadsize");
 		
+		if (!LogWrapper::getInstance()->initialize(sLog.c_str()))
+		{
+			return -1;
+		}
+
+		LOG_INFO("sLog:" << sLog);
+		LOG_INFO("sProxyId: " << sProxyId);
+		LOG_INFO("iMaxQueueSize:" << iMaxQueueSize);
+		LOG_INFO("iTimeout: " << iTimeout);
+		LOG_INFO("iRegisterThreadSize: " << iRegisterThreadSize);
+
 		for (int i=0; i<iRegisterThreadSize; ++i)
 		{
 			_registerThreads.push_back(new RegisterHandleThread(iMaxQueueSize, iTimeout));

@@ -2,9 +2,9 @@
 
 namespace Curious
 {
-	RegisterRequest::RegisterRequest(const AMD_MasterInterface_registerPtr& callback,
+	RegisterRequest::RegisterRequest(const AMD_MasterInterface_registerPtr& cb,
 		                             const std::string& sServerIP)
-	 : _callback(callback), _sServerIP(sServerIP), _time(time(NULL))
+	 : _callback(cb), _sServerIP(sServerIP), _time(time(NULL))
 	{
 
 	}
@@ -13,10 +13,17 @@ namespace Curious
 	{
 		std::string sNextServer("");
 
-		int iRet = ServerDataInfo::getInstance()->register(_sServerIP, sNextServer);
-		
+		int iRet = ServerDataInfo::getInstance()->registerServerIP(_sServerIP, sNextServer);
+		if (iRet != 0)
+		{
+			LOG_ERROR("register_error, server_ip=" << _sServerIP << ", ret=" << iRet);
+			return false;
+		}
+
 		_callback->ice_response(iRet, sNextServer);
 
+		LOG_DEBUG("server_ip=" <<_sServerIP << ", next_ip=" <<sNextServer);
+		
 		return true;
 	}
 
@@ -25,7 +32,7 @@ namespace Curious
 		_callback->ice_exception();
 	}
 
-	time_t RegisterRequest::time()
+	time_t RegisterRequest::getTime()
 	{
 		return _time;
 	}
