@@ -1,0 +1,1 @@
+a simple message tranfering server, which can be used as a mobile game server
