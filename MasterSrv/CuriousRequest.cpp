@@ -17,7 +17,6 @@ namespace Curious
 		if (iRet != 0)
 		{
 			LOG_ERROR("register_error, server_ip=" << _sServerIP << ", ret=" << iRet);
-			return false;
 		}
 
 		_callback->ice_response(iRet, sNextServer);
